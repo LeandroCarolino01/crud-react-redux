@@ -1,9 +1,7 @@
-import  { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT } from '../actions/types';
+import  { GET_CONTACTS, DELETE_CONTACT, ADD_CONTACT, GET_CONTACT, UPDATE_CONTACT } from '../actions/types';
 const initialState = {
-    contacts: [
-        
-        
-      ]
+    contacts: [],
+    contact: {}
 };
 
 export default function(state = initialState, action) {
@@ -13,18 +11,23 @@ export default function(state = initialState, action) {
                 ...state,
                 contacts: action.payload
             };
-            case DELETE_CONTACT:
-                return {
-                    ...state,
-                    contacts: state.contacts.filter(contact => 
-                        contact.id !== action.payload)
+        case GET_CONTACT:
+            return {
+                ...state,
+                contact: action.payload
+            }
+        case DELETE_CONTACT:
+            return {
+                ...state,
+                contacts: state.contacts.filter(contact => 
+                    contact.id !== action.payload)
 
-                }
-            case ADD_CONTACT:
-                return {
-                    ...state,
-                    contacts: [action.payload, ...state.contacts]
-                }
+            }
+        case ADD_CONTACT:
+            return {
+                ...state,
+                contacts: [action.payload, ...state.contacts]
+            }
         default: 
             return state;
     }
